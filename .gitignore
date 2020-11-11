@@ -1,5 +1,7 @@
-opencv/*
-Data Sets/*
-eyetraking/weights/*
-eyetraking/zips/*
-eyetraking/Eye-TrackingVersion1/weights/*
+opencv/
+Data Sets/
+*.sh
+eyetraking/weights/
+/sample_images/*
+/predictions/*
+eyetraking/Eye-TrackingVersion1/weights/

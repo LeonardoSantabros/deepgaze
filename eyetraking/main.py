@@ -14,6 +14,7 @@ from config import *
 from utilities import preprocess_images, preprocess_maps, preprocess_fixmaps, postprocess_predictions
 from models import sam_vgg, sam_resnet, kl_divergence, correlation_coefficient, nss
 
+return '<h1>eyetraking</h1>'
 
 def generator(b_s, phase_gen='train'):
     if phase_gen == 'train':
