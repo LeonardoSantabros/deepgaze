@@ -173,6 +173,7 @@ def dcn_resnet(input_tensor=None):
                             cache_subdir='models', md5_hash='f64f049c92468c9affcd44b0976cdafe',
                             # cache_dir='/code/eyetraking/Eye-TrackingVersion1/weights')
                             )
+    print(weights_path)
     model.load_weights(weights_path)
 
     return model
