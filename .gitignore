@@ -1,7 +1,7 @@
 opencv/
 Data Sets/
-Miniconda2-latest-Linux-x86_64.sh
+*.sh
 eyetraking/weights/
-eyetraking/sample_images/*
-eyetraking/predictions/*
+/sample_images/*
+/predictions/*
 eyetraking/Eye-TrackingVersion1/weights/
