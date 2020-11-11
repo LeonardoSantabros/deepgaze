@@ -25,3 +25,7 @@ def hello():
 @app.route('/about')
 def about():
     return '<h1>About</h1>'
+
+@app.route('/eyetraking')
+def eyetraking():
+    return '<h1>eyetraking</h1>'
