@@ -1,7 +1,7 @@
 opencv/
-Data Sets/
 *.sh
 eyetraking/weights/
-/sample_images/*
-/predictions/*
+eyetraking/sample_images/*
+eyetraking/predictions/*
 eyetraking/Eye-TrackingVersion1/weights/
+Data Sets/

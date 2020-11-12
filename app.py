@@ -1,4 +1,6 @@
+import os
 import time
+# from eyetraking.main import main
 
 import redis
 from flask import Flask
@@ -26,6 +28,8 @@ def hello():
 def about():
     return '<h1>About</h1>'
 
-@app.route('/eyetraking')
-def eyetraking():
+@app.route('/api/getPrediction')
+def getPrediction():
+    os.system('python /code/eyetraking/main.py test')
+    # main() 
     return '<h1>eyetraking</h1>'

@@ -1,8 +1,12 @@
 from __future__ import division
 
-import os
-newpath = os.getcwd() + "/Eye-TrackingVersion1"
-os.chdir(newpath)
+import os, sys
+# newpath = os.getcwd() + "/eyetraking/Eye-TrackingVersion1"
+# os.chdir(newpath)
+sys.path.append('/root/miniconda2/lib/python2.7/site-packages/')
+# print os.path.abspath()
+# print newpath
+print sys.path
 
 from keras.optimizers import RMSprop
 from keras.callbacks import EarlyStopping, ModelCheckpoint, LearningRateScheduler
@@ -13,8 +17,6 @@ import numpy as np
 from config import *
 from utilities import preprocess_images, preprocess_maps, preprocess_fixmaps, postprocess_predictions
 from models import sam_vgg, sam_resnet, kl_divergence, correlation_coefficient, nss
-
-return '<h1>eyetraking</h1>'
 
 def generator(b_s, phase_gen='train'):
     if phase_gen == 'train':
@@ -54,6 +56,7 @@ def generator_test(b_s, imgs_test_path):
         counter = (counter + b_s) % len(images)
 
 if __name__ == '__main__':
+# def main():
     if len(sys.argv) == 1:
         raise NotImplementedError
     else:
