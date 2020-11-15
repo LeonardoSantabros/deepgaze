@@ -1,6 +1,6 @@
 from __future__ import division
 
-# from flask import Flask, render_template
+from flask import Flask, render_template
 import os, sys, json
 # newpath = os.getcwd() + "/Eye-TrackingVersion1" # version linea de comandos
 newpath = os.getcwd() + "/eyetraking/Eye-TrackingVersion1" # version api
@@ -159,7 +159,7 @@ def predict():
     # Output Folder Path
     output_folder = 'predictions/'
 
-    imgs_test_path = "/code/eyetraking/sample_images"
+    imgs_test_path = "/code/eyetraking/sample_images/"
 
     file_names = [f for f in os.listdir(imgs_test_path) if f.endswith(('.jpg', '.jpeg', '.png'))]
     file_names.sort()
@@ -178,15 +178,14 @@ def predict():
         m.load_weights('weights/sam-resnet_salicon2017_weights.pkl') #Nueva version
 
     print("Predicting saliency maps for " + imgs_test_path)
-    print(generator_test(b_s=b_s, imgs_test_path=imgs_test_path)) 
-    # predictions = m.predict_generator(generator_test(b_s=b_s, imgs_test_path=imgs_test_path), nb_imgs_test)[0]
+    predictions = m.predict_generator(generator_test(b_s=b_s, imgs_test_path=imgs_test_path), nb_imgs_test)[0]
 
 
-    # for pred, name in zip(predictions, file_names):
-    #     original_image = cv2.imread(imgs_test_path + name, 0)
-    #     res = postprocess_predictions(pred[0], original_image.shape[0], original_image.shape[1])
-    #     print(pred, name)
-    #     print( '/code/eyetraking/' + output_folder + '%s' % name, res.astype(int) )
-    #     cv2.imwrite( '/code/eyetraking/' + output_folder + '%s' % name, res.astype(int))
+    for pred, name in zip(predictions, file_names):
+        original_image = cv2.imread(imgs_test_path + name, 0)
+        res = postprocess_predictions(pred[0], original_image.shape[0], original_image.shape[1])
+        print(pred, name)
+        print( '/code/eyetraking/' + output_folder + '%s' % name, res.astype(int) )
+        cv2.imwrite( '/code/eyetraking/' + output_folder + '%s' % name, res.astype(int))
         
     return 'h1'

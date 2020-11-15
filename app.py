@@ -31,13 +31,13 @@ def about():
 
 @app.route('/api/predict')
 def predicts():    
-    os.system('python /code/eyetraking/main.py test /code/eyetraking/sample_images/')
-    # predict()
+    # os.system('python /code/eyetraking/main.py test /code/eyetraking/sample_images/')
+    predict()
     return redirect('/api/getPrediction')
 
 @app.route('/api/getPrediction')
 def getPrediction():
     # send_from_directory('eyetraking/sample_images', '')
     # return render_template('home.html') 
-    # return main() 
+    return main() 
     return '<h1>eyetraking</h1>'
