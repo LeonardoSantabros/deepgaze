@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="jumbotron">  
+
+    {% for e in images %}
+
+    <img src="{{url_for('static', filename='sample_images/' + e )}}" alt="{{e}}" height="100" />
+
+    {% endfor %}
+
+</div>
+
+<a href="/api/predict">hi</a>
+
+<div class="jumbotron">  
+
+    {% for e in predictions %}    
+
+    <img src="{{url_for('static', filename='predictions/' + e )}}" alt="{{e}}" height="100" />
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

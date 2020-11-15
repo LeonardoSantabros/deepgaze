@@ -1,11 +1,12 @@
 import os
 import time
-# from eyetraking.main import main
+# import eyetraking.main
+from eyetraking.main import main, predict
 
 import redis
-from flask import Flask
+from flask import Flask, render_template, redirect
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='eyetraking')
 cache = redis.Redis(host='redis', port=6379)
 
 def get_hit_count():
@@ -22,14 +23,21 @@ def get_hit_count():
 @app.route('/')
 def hello():
     count = get_hit_count()
-    return 'Hello World! I have been seen {} times.\n'.format(count)
+    return 'Hello World! I have been seen {} times.\n'.format(count) 
 
 @app.route('/about')
 def about():
     return '<h1>About</h1>'
 
+@app.route('/api/predict')
+def predicts():    
+    os.system('python /code/eyetraking/main.py test /code/eyetraking/sample_images/')
+    # predict()
+    return redirect('/api/getPrediction')
+
 @app.route('/api/getPrediction')
 def getPrediction():
-    os.system('python /code/eyetraking/main.py test')
-    # main() 
+    # send_from_directory('eyetraking/sample_images', '')
+    # return render_template('home.html') 
+    # return main() 
     return '<h1>eyetraking</h1>'
