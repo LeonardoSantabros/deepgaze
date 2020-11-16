@@ -4,7 +4,8 @@ import time
 from eyetraking.main import main, predict
 
 import redis
-from flask import Flask, render_template, redirect
+from PIL import Image
+from flask import Flask, render_template, redirect, request, jsonify
 
 app = Flask(__name__, static_folder='eyetraking')
 cache = redis.Redis(host='redis', port=6379)
@@ -34,6 +35,23 @@ def predicts():
     # os.system('python /code/eyetraking/main.py test /code/eyetraking/sample_images/')
     predict()
     return redirect('/api/getPrediction')
+
+@app.route('/api/delete')
+def delete():    
+    name = request.args.get('name')
+    os.remove( '/code/eyetraking/sample_images/{}'.format(name) ) 
+    os.remove( '/code/eyetraking/predictions/{}'.format(name) ) 
+    return redirect('/api/getPrediction')
+    return '<h1>The name is: {}</h1>'.format(name)
+
+@app.route("/api/img", methods=["POST"])
+def process_image():
+    file = request.files['imagefile']
+    # Read the image via file.stream
+    img = Image.open(file.stream)
+    img.save('/code/eyetraking/sample_images/{}'.format(file.filename), img.format)
+    return redirect('/api/getPrediction')
+    return jsonify({'msg': 'success', 'size': [img.width, img.height]})
 
 @app.route('/api/getPrediction')
 def getPrediction():
