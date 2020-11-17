@@ -1,11 +1,11 @@
 import os
 import time
 # import eyetraking.main
-from eyetraking.main import main, predict
 
 import redis
-from PIL import Image
 from flask import Flask, render_template, redirect, request, jsonify
+from eyetraking.main import main, predict
+from PIL import Image
 
 app = Flask(__name__, static_folder='eyetraking')
 cache = redis.Redis(host='redis', port=6379)
@@ -29,6 +29,10 @@ def hello():
 @app.route('/about')
 def about():
     return '<h1>About</h1>'
+
+@app.route('/api/')
+def eyetraking():
+    return '<h1>Ruta base API</h1>'
 
 @app.route('/api/predict')
 def predicts():    
