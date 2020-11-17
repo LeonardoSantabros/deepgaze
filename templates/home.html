@@ -28,7 +28,8 @@
 </div>
 
 <div class="m-3">
-    <a class="btn btn-primary btn-lg btn-block" href="/api/predict">Predecir Todo</a>
+    <a class="btn btn-primary btn-lg btn-block" id="predict" href="/api/predict">Predecir Todo</a>
+    <a class="btn btn-secondary btn-lg btn-block" id="charging" href="#" hidden>Cargando...</a>
 </div>
 
 <div class="jumbotron d-flex justify-content-center">  
@@ -36,7 +37,7 @@
     {% for e in predictions %}    
     
     <div class="text-center">
-        <a href="http://localhost:5000/eyetraking/predictions/{{e}}" download>
+        <a href="http://deepgaze.xyz/eyetraking/predictions/{{e}}" download>
             <img src="{{url_for('static', filename='predictions/' + e )}}" alt="{{e}}" height="100" />
         </a>
     </div>
@@ -46,5 +47,12 @@
 </div>
 
 <p class="text-center">*Click en la imagen para descargar</p>
+
+<script>
+    document.getElementById('predict').addEventListener('click', function() {
+        this.hidden = true;
+        document.getElementById('charging').hidden = false;
+    });
+</script>
 
 {% endblock %}

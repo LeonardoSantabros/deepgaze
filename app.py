@@ -1,11 +1,11 @@
 import os
 import time
 # import eyetraking.main
-from eyetraking.main import main, predict
 
 import redis
-from PIL import Image
 from flask import Flask, render_template, redirect, request, jsonify
+from eyetraking.main import main, predict
+from PIL import Image
 
 app = Flask(__name__, static_folder='eyetraking')
 cache = redis.Redis(host='redis', port=6379)
