@@ -9,11 +9,11 @@ from PIL import Image
 import pymysql.cursors
 
 app = Flask(__name__, static_folder='eyetraking')
-cache = redis.Redis(host='redis', port=6379)
+cache = redis.Redis(host='localhost', port=6379)
 
 # Connect to the database
 connection = pymysql.connect(
-    host='167.86.127.10',
+    host='localhost',
     user='deepgaz_root',
     password='iEjySCEs6Rjz',
     db='deepgaz_db',
