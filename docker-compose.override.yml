@@ -7,8 +7,8 @@ services:
                 limits:
                     cpus: '3'
                     memory: 6g
-        build:
-            network: host
+        networks:
+            - 'host'
     redis:
-        build:
-            network: host
+        networks:
+            - 'host'
