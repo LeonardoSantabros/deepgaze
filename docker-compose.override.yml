@@ -7,8 +7,6 @@ services:
                 limits:
                     cpus: '3'
                     memory: 6g
-        networks:
-            - 'host'
+        network_mode: "host"
     redis:
-        networks:
-            - 'host'
+        network_mode: "host"
