@@ -13,12 +13,12 @@ cache = redis.Redis(host='redis', port=6379)
 
 # Connect to the database
 connection = pymysql.connect(
-    host='192.168.0.110',
-    user='root',
-    password='',
-    db='cs_creditolimpio',
+    host='167.86.127.10',
+    user='deepgaz_root',
+    password='iEjySCEs6Rjz',
+    db='deepgaz_db',
     charset='utf8mb4',
-    # port = 3306,
+    port = 3306,
     cursorclass=pymysql.cursors.DictCursor
 )
 
