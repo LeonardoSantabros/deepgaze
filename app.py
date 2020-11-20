@@ -6,9 +6,35 @@ import redis
 from flask import Flask, render_template, redirect, request, jsonify
 from eyetraking.main import main, predict
 from PIL import Image
+import pymysql.cursors
 
 app = Flask(__name__, static_folder='eyetraking')
 cache = redis.Redis(host='redis', port=6379)
+
+# Connect to the database
+connection = pymysql.connect(
+    host='192.168.0.110',
+    user='root',
+    password='',
+    db='cs_creditolimpio',
+    charset='utf8mb4',
+    # port = 3306,
+    cursorclass=pymysql.cursors.DictCursor
+)
+
+try:
+    with connection.cursor() as cursor:
+        # Create a new record
+        sql = "SELECT * FROM `users`"
+        cursor.execute(sql)
+        result = cursor.fetchone()
+        print(result)
+    # connection is not autocommit by default. So you must commit to save
+    # your changes.
+    # connection.commit()
+    
+finally:
+    connection.close()
 
 def get_hit_count():
     retries = 5
