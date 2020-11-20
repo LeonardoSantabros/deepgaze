@@ -5,3 +5,4 @@ eyetraking/sample_images/*
 eyetraking/predictions/*
 eyetraking/Eye-TrackingVersion1/weights/
 Data Sets/
+env.py

@@ -1,6 +1,7 @@
 import os
 import time
 # import eyetraking.main
+import env
 
 import redis
 from flask import Flask, render_template, redirect, request, jsonify
@@ -9,14 +10,14 @@ from PIL import Image
 import pymysql.cursors
 
 app = Flask(__name__, static_folder='eyetraking')
-cache = redis.Redis(host='redis', port=6379)
+cache = redis.Redis(host=env.hostCache, port=6379)
 
 # Connect to the database
 connection = pymysql.connect(
-    host='192.168.0.110',
-    user='root',
-    password='',
-    db='cs_creditolimpio',
+    host=env.hostDB,
+    user=env.userDB,
+    password=env.passwordDB,
+    db=env.db,
     charset='utf8mb4',
     # port = 3306,
     cursorclass=pymysql.cursors.DictCursor
