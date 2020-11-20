@@ -19,7 +19,7 @@ connection = pymysql.connect(
     password=env.passwordDB,
     db=env.db,
     charset='utf8mb4',
-    # port = 3306,
+    port = 3306,
     cursorclass=pymysql.cursors.DictCursor
 )
 
