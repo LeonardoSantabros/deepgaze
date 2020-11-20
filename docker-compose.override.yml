@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  python2:
+    deploy:
+        resources:
+            limits:
+                cpus: '3'
+                memory: 6g
+    networks:
+        - host
+  db:
+    networks:
+        - host
