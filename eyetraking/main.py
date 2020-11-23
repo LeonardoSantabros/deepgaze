@@ -1,7 +1,7 @@
 from __future__ import division
 
 from flask import Flask, render_template
-import os, sys, json
+import os, sys, json, shutil
 # newpath = os.getcwd() + "/Eye-TrackingVersion1" # version linea de comandos
 newpath = os.getcwd() + "/eyetraking/Eye-TrackingVersion1" # version api
 os.chdir(newpath)
@@ -205,3 +205,20 @@ def predict():
     diccionario["predicts"] = predicts
 
     return diccionario
+
+def uploadImg():
+    imgs_path = "/code/eyetraking/sample_images/"
+    predictions_path = "/code/eyetraking/predictions/"
+    for files in os.listdir(imgs_path):
+        path = os.path.join(imgs_path, files)
+        try:
+            shutil.rmtree(path)
+        except OSError:
+            os.remove(path)
+
+    for files in os.listdir(predictions_path):
+        path = os.path.join(predictions_path, files)
+        try:
+            shutil.rmtree(path)
+        except OSError:
+            os.remove(path)
