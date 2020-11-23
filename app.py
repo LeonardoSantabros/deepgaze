@@ -1,4 +1,4 @@
-import os
+import os, json
 import time
 # import eyetraking.main
 import env
@@ -6,10 +6,12 @@ import env
 import redis
 from flask import Flask, render_template, redirect, request, jsonify
 from eyetraking.main import main, predict
+from flask_cors import CORS, cross_origin
 from PIL import Image
 import pymysql.cursors
 
 app = Flask(__name__, static_folder='eyetraking')
+CORS(app)
 cache = redis.Redis(host=env.hostCache, port=6379)
 
 # Connect to the database
@@ -65,14 +67,16 @@ def eyetraking():
 def predicts():    
     # os.system('python /code/eyetraking/main.py test /code/eyetraking/sample_images/')
     predict()
-    return redirect('/api/getPrediction')
+    return jsonify({'response': True }) # respuesta para api
+    return redirect('/api/getPrediction') # Retorno de la app funcionando solo en python
 
 @app.route('/api/delete')
 def delete():    
     name = request.args.get('name')
     os.remove( '/code/eyetraking/sample_images/{}'.format(name) ) 
     os.remove( '/code/eyetraking/predictions/{}'.format(name) ) 
-    return redirect('/api/getPrediction')
+    return json.dumps({'response': True }) # respuesta para api
+    return redirect('/api/getPrediction') # Retorno de la app funcionando solo en python
     return '<h1>The name is: {}</h1>'.format(name)
 
 @app.route("/api/img", methods=["POST"])
@@ -80,8 +84,9 @@ def process_image():
     file = request.files['imagefile']
     # Read the image via file.stream
     img = Image.open(file.stream)
-    img.save('/code/eyetraking/sample_images/{}'.format(file.filename), img.format)
-    return redirect('/api/getPrediction')
+    img.save('/code/eyetraking/sample_images/{}'.format(file.filename), img.format)    
+    return jsonify({'response': True, 'url': 'http://localhost:5000/eyetraking/sample_images/{}'.format(file.filename) }) # respuesta para api
+    return redirect('/api/getPrediction') # Retorno de la app funcionando solo en python
     return jsonify({'msg': 'success', 'size': [img.width, img.height]})
 
 @app.route('/api/getPrediction')
