@@ -7,3 +7,4 @@ eyetraking/Eye-TrackingVersion1/weights/
 Data Sets/
 env.py
 *.pyc
+docker-compose.override.yml
