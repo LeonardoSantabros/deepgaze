@@ -81,7 +81,7 @@ def delete():
 
 @app.route("/api/img", methods=["POST"])
 def process_image():
-    file = request.files['imagefile']
+    file = request.files['file']
     # Read the image via file.stream
     img = Image.open(file.stream)
     img.save('/code/eyetraking/sample_images/{}'.format(file.filename), img.format)    
