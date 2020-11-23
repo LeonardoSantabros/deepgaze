@@ -5,7 +5,7 @@ import env
 
 import redis
 from flask import Flask, render_template, redirect, request, jsonify
-from eyetraking.main import main, predict
+from eyetraking.main import main, predict, uploadImg
 from flask_cors import CORS, cross_origin
 from PIL import Image
 import pymysql.cursors
@@ -81,6 +81,7 @@ def delete():
 
 @app.route("/api/img", methods=["POST"])
 def process_image():
+    uploadImg()
     file = request.files['file']
     # Read the image via file.stream
     img = Image.open(file.stream)
