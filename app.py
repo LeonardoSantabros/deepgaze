@@ -66,8 +66,8 @@ def eyetraking():
 @app.route('/api/predict')
 def predicts():    
     # os.system('python /code/eyetraking/main.py test /code/eyetraking/sample_images/')
-    predict()
-    return jsonify({'response': True }) # respuesta para api
+    imagenes = predict()
+    return jsonify({'response': True, 'data': imagenes }) # respuesta para api
     return redirect('/api/getPrediction') # Retorno de la app funcionando solo en python
 
 @app.route('/api/delete')
