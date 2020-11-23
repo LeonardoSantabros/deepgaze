@@ -188,4 +188,20 @@ def predict():
         print( '/code/eyetraking/' + output_folder + '%s' % name, res.astype(int) )
         cv2.imwrite( '/code/eyetraking/' + output_folder + '%s' % name, res.astype(int))
         
-    return 'h1'
+    images = []
+    predicts = []
+    diccionario = {}
+
+    for path in file_names: 
+        images.append( os.path.join("/eyetraking/sample_images/", path) )
+        print images
+
+    diccionario["imagenes"] = images
+        
+    for path in file_names: 
+        predicts.append( os.path.join("/eyetraking/predictions/", path) )
+        print predicts
+
+    diccionario["predicts"] = predicts
+
+    return diccionario
